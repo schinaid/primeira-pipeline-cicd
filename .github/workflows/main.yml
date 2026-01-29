@@ -14,3 +14,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: criando a imagem e subindo no dockerhub
+        uses: docker/build-push-action@v5.3.0
+        with:
+          context: ./src
+          file: ./src/Dockerfile
+          push: true
+          tags: |
+            schinaid/aula-primeira-pipeline:v${{ github.run_number }}
+            schinaid/aula-primeira-pipeline:latest
