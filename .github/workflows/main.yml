@@ -34,6 +34,9 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.K8S_CONFIG }}
+    - name: Debug Kubeconfig
+      run: |
+        echo "${{ secrets.K8S_CONFIG }}" | head -n 10
     - name: Execucao do manifesto
       uses: Azure/k8s-deploy@v5
       with:
