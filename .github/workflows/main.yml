@@ -29,17 +29,17 @@ jobs:
     steps:
     - name: obtendo o codigo
       uses: actions/checkout@v6.0.2
-    - name: configuracao de contexto do kubeconfig
-      uses: azure/k8s-set-context@v4.0.0
-      with:
-        method: kubeconfig
-        kubeconfig: ${{ secrets.K8S_CONFIG }}
-    #- name: Debug Kubeconfig
-    #  run: |
-    #    echo "${{ secrets.K8S_CONFIG }}" | head -n 10
     - name: Execucao do manifesto local
       run: |
         kubectl apply -f ./k8s/deployment.yaml
+    #- name: configuracao de contexto do kubeconfig
+    #  uses: azure/k8s-set-context@v4.0.0
+    #  with:
+    #    method: kubeconfig
+    #    kubeconfig: ${{ secrets.K8S_CONFIG }}
+    #- name: Debug Kubeconfig
+    #  run: |
+    #    echo "${{ secrets.K8S_CONFIG }}" | head -n 10
     #se for usar um cluster cloud usar esse comando de baixo 
     #- name: Execucao do manifesto
     #  uses: Azure/k8s-deploy@v5
