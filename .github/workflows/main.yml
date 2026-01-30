@@ -29,9 +29,18 @@ jobs:
     steps:
     - name: obtendo o codigo
       uses: actions/checkout@v6.0.2
-    - name: Execucao do manifesto local
+    - name: Criando Cluster Kubernetes (Kind)
+        uses: helm/kind-action@v1.10.0
+        with:
+          cluster_name: cluster-teste
+    - name: Execucao do manifesto no Kind
       run: |
-        kubectl apply -f ./k8s/deployment.yaml
+        # Aqui o kubectl ja esta configurado automaticamente para o Kind
+        kubectl apply -f ./k8s/deployment.yaml    
+    - name: Verificando o deploy
+      run: |
+        kubectl get pods
+        kubectl get deployments
     #- name: configuracao de contexto do kubeconfig
     #  uses: azure/k8s-set-context@v4.0.0
     #  with:
